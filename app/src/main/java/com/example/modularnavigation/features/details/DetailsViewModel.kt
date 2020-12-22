@@ -1,4 +1,4 @@
-package com.example.modularnavigation
+package com.example.modularnavigation.features.details
 
 import android.util.Log
 import androidx.lifecycle.LiveData
