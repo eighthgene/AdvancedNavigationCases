@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".DetailsFragment">
+
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Details fragment"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/details_dec_btn"
+        app:layout_constraintEnd_toEndOf="@+id/details_dec_btn"
+        app:layout_constraintStart_toStartOf="@+id/details_dec_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/details_dec_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="decrement"
+        app:layout_constraintBottom_toTopOf="@+id/details_inc_btn"
+        app:layout_constraintEnd_toEndOf="@+id/details_inc_btn"
+        app:layout_constraintStart_toStartOf="@+id/details_inc_btn"
+        app:layout_constraintTop_toBottomOf="@+id/counter" />
+
+    <Button
+        android:id="@+id/details_inc_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="increment"
+        app:layout_constraintBottom_toTopOf="@+id/navigate_to_details_btn"
+        app:layout_constraintEnd_toEndOf="@+id/navigate_to_details_btn"
+        app:layout_constraintStart_toStartOf="@+id/navigate_to_details_btn"
+        app:layout_constraintTop_toBottomOf="@+id/details_dec_btn" />
+
+    <Button
+        android:id="@+id/navigate_to_details_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Navigate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details_inc_btn">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
