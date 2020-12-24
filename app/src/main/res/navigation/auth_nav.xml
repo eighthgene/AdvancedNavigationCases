@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_nav"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/startAuthFragment">
+
+    <fragment
+        android:id="@+id/startAuthFragment"
+        android:name="com.example.modularnavigation.features.auth.StartAuthFragment"
+        android:label="StartAuthFragment"
+        tools:layout="@layout/fragment_auth_start">
+        <argument
+            android:name="isFromSplashScreen"
+            android:defaultValue="false"
+            app:argType="boolean"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_startAuthFragment_to_finishAuthFragment"
+            app:destination="@id/finishAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishAuthFragment"
+        android:name="com.example.modularnavigation.features.auth.FinishAuthFragment"
+        android:label="FinishAuthFragment"
+        tools:layout="@layout/fragment_auth_finish"/>
+</navigation>
