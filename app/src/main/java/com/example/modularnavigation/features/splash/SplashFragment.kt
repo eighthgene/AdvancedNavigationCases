@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.modularnavigation.R
 import com.example.modularnavigation.features.auth.FinishAuthFragment
@@ -21,31 +22,20 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val authResult = findNavController().currentBackStackEntry
-            ?.savedStateHandle
-            ?.remove<Boolean>(FinishAuthFragment.AUTH_FLOW_RESULT_KEY) == true
+        // Navigate with SingleLiveEvent from Splash screen
+        splashViewModel.splashNavCommand.observe(viewLifecycleOwner, Observer { splashNavCommand ->
 
-        if (authResult) {
-            navigateToMainScreen()
-            return
-        }
+            val navController = Navigation.findNavController(requireActivity(), R.id.activity_root_fragment_nav_host)
+            val mainGraph = navController.navInflater.inflate(R.navigation.main_nav)
 
-        splashViewModel.splashNavCommand.observe(viewLifecycleOwner, Observer { navCommand ->
-            when(navCommand){
-                SplashNavCommand.NAVIGATE_TO_MAIN -> navigateToMainScreen()
-                SplashNavCommand.NAVIGATE_TO_AUTH -> navigateToAuthFlow()
-                null -> {
-                    // nothing
-                }
+            // Way to change first screen at runtime.
+            mainGraph.startDestination = when(splashNavCommand){
+                SplashNavCommand.NAVIGATE_TO_MAIN -> R.id.mainFragment
+                SplashNavCommand.NAVIGATE_TO_AUTH -> R.id.auth_nav
+                null -> throw IllegalArgumentException("Illegal splash navigation command")
             }
+            navController.graph = mainGraph
         })
     }
 
-    private fun navigateToAuthFlow() {
-        findNavController().navigate(R.id.action_splashFragment_to_auth_flow, StartAuthFragmentArgs(isFromSplashScreen = true).toBundle())
-    }
-
-    private fun navigateToMainScreen() {
-        findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
-    }
 }

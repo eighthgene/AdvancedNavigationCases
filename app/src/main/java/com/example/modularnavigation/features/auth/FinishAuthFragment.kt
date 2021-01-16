@@ -13,25 +13,24 @@ import kotlinx.android.synthetic.main.fragment_auth_finish.*
 
 class FinishAuthFragment : Fragment(R.layout.fragment_auth_finish) {
 
-    companion object {
-        const val AUTH_FLOW_RESULT_KEY = "auth_flow_result"
-    }
-
     private val finishAuthViewModel: FinishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         fragment_finish_auth_button.setOnClickListener {
+            // Save hasAuthData flag in prefs
             finishAuthViewModel.setFinishAuthFlag()
 
-            // Navigate back from auth flow
-            Navigation.findNavController(
-                requireActivity(),
-                R.id.activity_root_fragment_nav_host
-            ).popBackStack(R.id.auth_nav, true)
+            val result = findNavController().popBackStack(R.id.auth_nav, true)
 
-            findNavController().currentBackStackEntry?.savedStateHandle?.set(AUTH_FLOW_RESULT_KEY, true)
+            // Navigate back from auth flow
+            if (result.not()) {
+                // we can't open new destination with this action
+                // --> we opened Auth flow from splash
+                // --> need to open main graph
+                findNavController().navigate(R.id.mainFragment)
+            }
         }
     }
 
