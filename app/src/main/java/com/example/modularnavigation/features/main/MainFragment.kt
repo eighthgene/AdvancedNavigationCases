@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private var currentNavController: LiveData<NavController>? = null
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         // Now that BottomNavigationBar has restored its instance state
@@ -33,17 +31,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun setupBottomNavigationBar() {
 
-        val navGraphIds = listOf(R.navigation.home_nav, R.navigation.details_nav, R.navigation.more_nav)
+        val navGraphIds = listOf(
+            R.navigation.home_nav,
+            R.navigation.details_nav,
+            R.navigation.more_nav
+        )
 
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottom_nav.setupWithNavController(
+        bottom_nav.setupWithNavController(
             navGraphIds = navGraphIds,
-            fragmentManager = requireActivity().supportFragmentManager,
+            fragmentManager = childFragmentManager,
             containerId = R.id.nav_container,
             intent = requireActivity().intent
         )
-
-        currentNavController = controller
 
     }
 

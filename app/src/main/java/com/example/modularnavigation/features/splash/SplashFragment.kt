@@ -30,8 +30,8 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             return
         }
 
-        splashViewModel.splashNavCommand.observe(viewLifecycleOwner, Observer {
-            when(it){
+        splashViewModel.splashNavCommand.observe(viewLifecycleOwner, Observer { navCommand ->
+            when(navCommand){
                 SplashNavCommand.NAVIGATE_TO_MAIN -> navigateToMainScreen()
                 SplashNavCommand.NAVIGATE_TO_AUTH -> navigateToAuthFlow()
                 null -> {
