@@ -4,9 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_more"
     app:startDestination="@id/settingsFragment">
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.modularnavigation.features.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+
+        <action
+            android:id="@+id/action_settingsFragment_to_auth_flow"
+            app:destination="@+id/auth_nav" />
+
+    </fragment>
+
+    <include app:graph="@navigation/auth_nav" />
+
 </navigation>

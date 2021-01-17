@@ -11,4 +11,5 @@ class FinishViewModel : ViewModel() {
     fun setFinishAuthFlag() {
         authRepository.putHasAuthData(true)
     }
+
 }
